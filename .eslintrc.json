@@ -1,0 +1,65 @@
+{
+  // reference for the eslint rules
+
+  // https://github.com/eslint/eslint/blob/main/packages/js/src/configs/eslint-recommended.js
+
+  // https://nextjs.org/docs/basic-features/eslint#eslint-plugin
+
+  "extends": ["next/core-web-vitals", "eslint:recommended"],
+
+  "rules": {
+    // overwrite the rule from eslint:recommended to show as warn instead of error
+
+    "no-unused-vars": ["error", { "args": "all", "argsIgnorePattern": "^_" }],
+
+    "import/order": [
+      "error",
+
+      {
+        "groups": [["external", "builtin"], "internal", ["sibling", "parent"], "index"],
+
+        "pathGroups": [
+          {
+            "pattern": "~/**",
+
+            "group": "internal"
+          }
+        ],
+
+        "alphabetize": {
+          "order": "asc",
+
+          "caseInsensitive": true
+        }
+      }
+    ]
+  },
+
+  "overrides": [
+    {
+      "files": ["*.d.ts"],
+
+      "rules": {
+        "import/order": "off",
+
+        "no-unused-vars": "off"
+      }
+    },
+
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+
+      "plugins": ["jest", "jest-formatting", "testing-library", "jest-dom"],
+
+      "extends": [
+        "plugin:jest/recommended",
+
+        "plugin:jest-formatting/recommended",
+
+        "plugin:testing-library/react",
+
+        "plugin:jest-dom/recommended"
+      ]
+    }
+  ]
+}
